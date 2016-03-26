@@ -1,0 +1,84 @@
+<form class="form-horizontal">
+    <div class="control-group">
+        <label class="control-label">{{ _('Path to Script') }}</label>
+        <div class="controls">
+            <input type="text" class="input-block-level" data-bind="value: settings.plugins.pantilt.pathToScript">
+        </div>
+    </div>
+</form>
+
+<div>
+    <h1>{{ _('Pan settings') }}</h1>
+    <div>
+        <form class="form-horizontal">
+            <div class="control-group">
+                <label class="control-label">{{ _('Initial Pan Value') }}</label>
+                <div class="controls">
+                    <input type="number" class="input-block-level" data-bind="value: settings.plugins.pantilt.pan.initialValue">
+                </div>
+            </div>
+        </form>
+        <form class="form-horizontal">
+            <div class="control-group">
+                <label class="control-label">{{ _('Min Pan Value') }}</label>
+                <div class="controls">
+                    <input type="number" class="input-block-level" data-bind="value: settings.plugins.pantilt.pan.minValue">
+                </div>
+            </div>
+        </form>
+        <form class="form-horizontal">
+            <div class="control-group">
+                <label class="control-label">{{ _('Max Pan Value') }}</label>
+                <div class="controls">
+                    <input type="number" class="input-block-level" data-bind="value: settings.plugins.pantilt.pan.maxValue">
+                </div>
+            </div>
+        </form>
+        <form class="form-horizontal">
+            <div class="control-group">
+                <label class="control-label">{{ _('Invert Pan Buttons') }}</label>
+                <div class="controls">
+                    <input type="checkbox" class="input-block-level" data-bind="value: settings.plugins.pantilt.pan.invert">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <h1>{{ _('Tilt settings') }}</h1>
+    <div>
+        <form class="form-horizontal">
+            <div class="control-group">
+                <label class="control-label">{{ _('Initial Tilt Value') }}</label>
+                <div class="controls">
+                    <input type="number" class="input-block-level" data-bind="value: settings.plugins.pantilt.tilt.initialValue">
+                </div>
+            </div>
+        </form>
+        <form class="form-horizontal">
+            <div class="control-group">
+                <label class="control-label">{{ _('Min Tilt Value') }}</label>
+                <div class="controls">
+                    <input type="number" class="input-block-level" data-bind="value: settings.plugins.pantilt.tilt.minValue">
+                </div>
+            </div>
+        </form>
+        <form class="form-horizontal">
+            <div class="control-group">
+                <label class="control-label">{{ _('Max Tilt Value') }}</label>
+                <div class="controls">
+                    <input type="number" class="input-block-level" data-bind="value: settings.plugins.pantilt.tilt.maxValue">
+                </div>
+            </div>
+        </form>
+        <form class="form-horizontal">
+            <div class="control-group">
+                <label class="control-label">{{ _('Invert Tilt Buttons') }}</label>
+                <div class="controls">
+                    <input type="checkbox" class="input-block-level" data-bind="value: settings.plugins.pantilt.tilt.invert">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
