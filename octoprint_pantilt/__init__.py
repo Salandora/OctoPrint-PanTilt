@@ -22,8 +22,10 @@ class PantiltPlugin(octoprint.plugin.SettingsPlugin,
 	def __init__(self):
 		self.panValue = 0
 		self.tiltValue = 0
+		self.pantiltHandlers = None
 
 	def on_after_startup(self):
+		self.pantiltHandlers = self._plugin_manager.get_hooks("octoprint.plugin.pantilt_handler")
 		self.callScript(self._settings.get(["pan", "initialValue"]), self._settings.get(["tilt", "initialValue"]))
 
 
@@ -53,6 +55,14 @@ class PantiltPlugin(octoprint.plugin.SettingsPlugin,
 	def callScript(self, panValue, tiltValue):
 		self.panValue = max(self._settings.get(["pan", "minValue"]), min(self._settings.get(["pan", "maxValue"]), panValue))
 		self.tiltValue = max(self._settings.get(["tilt", "minValue"]), min(self._settings.get(["tilt", "maxValue"]), tiltValue))
+
+		# if there are anly pantilt handlers, loop through them, then return
+		if self.pantiltHandlers is not None:
+			for name, handler in self.pantiltHandlers.items():
+				handler(int(self.panValue), int(self._settings.get(["pan", "minValue"])), int(self._settings.get(["pan", "maxValue"])),
+						self.tiltValue, self._settings.get(["tilt", "minValue"]),
+						int(self._settings.get(["tilt", "maxValue"])))
+			return
 
 		script = self._settings.get(["pathToScript"])
 		if script == "":
@@ -102,16 +112,16 @@ class PantiltPlugin(octoprint.plugin.SettingsPlugin,
 	def on_api_command(self, command, data):
 		if command == "set":
 			if "panValue" in data:
-				panValue = data["panValue"]
+				panValue = int(data["panValue"])
 			if "tiltValue" in data:
-				tiltValue = data["tiltValue"]
+				tiltValue = int(data["tiltValue"])
 			self.callScript(panValue, tiltValue)
 		elif command == "left" or command == "right":
 			panValue = self.panValue
 
 			stepSize = 1
 			if stepSize in data:
-				stepSize = data["stepSize"]
+				stepSize = int(data["stepSize"])
 
 			if self._settings.get(["pan", "invert"]):
 				panValue = panValue - (stepSize if command == "right" else -stepSize)
@@ -124,7 +134,7 @@ class PantiltPlugin(octoprint.plugin.SettingsPlugin,
 
 			stepSize = 1
 			if stepSize in data:
-				stepSize = data["stepSize"]
+				stepSize = int(data["stepSize"])
 
 			if self._settings.get(["tilt", "invert"]):
 				tiltValue = tiltValue - (stepSize if command == "up" else -stepSize)
