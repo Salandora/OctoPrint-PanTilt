@@ -13,6 +13,7 @@ global __plugin_hooks__
 The main PanTilt plugin will then pass changes in the web cam controls to all registered handlers.  This lets each type
 of pan/tilt camera implementation define the setup and interface with the hardware.
 
+https://github.com/c-devine/OctoPrint-PanTilt/archive/command-handler.zip
 
 **TODO:** Describe what your plugin does.
 
