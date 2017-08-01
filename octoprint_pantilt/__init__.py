@@ -57,7 +57,7 @@ class PantiltPlugin(octoprint.plugin.SettingsPlugin,
 		self.tiltValue = max(self._settings.get(["tilt", "minValue"]), min(self._settings.get(["tilt", "maxValue"]), tiltValue))
 
 		# if there are anly pantilt handlers, loop through them, then return
-		if self.pantiltHandlers is not None:
+		if len(self.pantiltHandlers) > 0:
 			values = {'pan': self.panValue, 'panMin': self._settings.get(["pan", "minValue"]),
 					  'panMax': self._settings.get(["pan", "maxValue"]),
 					  'tilt': self.tiltValue, 'tiltMin': self._settings.get(["tilt", "minValue"]),
